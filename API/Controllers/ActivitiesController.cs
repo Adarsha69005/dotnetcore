@@ -13,7 +13,7 @@ namespace API.Controllers
     {
        
         [HttpGet]
-        public async Task<ActionResult<List<Activity>>> List() {
+        public async Task<ActionResult<List<ActivityDto>>> List() {
             return await Mediator.Send(new List.Query());
         }
 
@@ -39,6 +39,12 @@ namespace API.Controllers
         public async Task<ActionResult<Unit>> Delete(Guid id)
         {
             return await Mediator.Send(new Delete.Command{Id = id});
+        }
+
+        [HttpPost("{id}/attend")] 
+        public async Task<ActionResult<Unit>> Attend(Guid id)
+        {
+            return await Mediator.Send(new Attend.Command{Id = id});
         }
 
     }
